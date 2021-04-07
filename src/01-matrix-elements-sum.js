@@ -20,9 +20,7 @@ function getMatrixElementsSum(matrix) {
     for (let j = 0; j < matrix[i].length; j++) {
       if (i === 0) {
         result += matrix[i][j];
-      } else {
-        if (matrix[i - 1][j] !== 0) result += matrix[i][j];
-      }
+      } else if (matrix[i - 1][j] !== 0) result += matrix[i][j];
     }
   }
   return result;
