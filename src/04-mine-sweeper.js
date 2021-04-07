@@ -21,8 +21,30 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function getNumberOfMinesAround(arr, x, y) {
+  const minesCountAround = 0
+    + ((x === 0) || (arr[x - 1][y - 1] === undefined) ? 0 : Number(arr[x - 1][y - 1]))
+    + ((x === 0) || (arr[x - 1][y] === undefined) ? 0 : Number(arr[x - 1][y]))
+    + ((x === 0) || (arr[x - 1][y + 1] === undefined) ? 0 : Number(arr[x - 1][y + 1]))
+    + ((arr[x][y - 1] === undefined) ? 0 : Number(arr[x][y - 1]))
+    + ((arr[x][y + 1] === undefined) ? 0 : Number(arr[x][y + 1]))
+    + ((x === (arr.length - 1)) || (arr[x + 1][y - 1] === undefined)
+      ? 0 : Number(arr[x + 1][y - 1]))
+    + ((x === (arr.length - 1)) || (arr[x + 1][y] === undefined) ? 0 : Number(arr[x + 1][y]))
+    + ((x === (arr.length - 1)) || (arr[x + 1][y + 1] === undefined)
+      ? 0 : Number(arr[x + 1][y + 1]));
+  return minesCountAround;
+}
+
+function minesweeper(matrix) {
+  const result = [];
+  for (let i = 0; i < matrix.length; i++) {
+    result.push([]);
+    for (let j = 0; j < matrix[i].length; j++) {
+      result[i][j] = getNumberOfMinesAround(matrix, i, j);
+    }
+  }
+  return result;
 }
 
 module.exports = minesweeper;
