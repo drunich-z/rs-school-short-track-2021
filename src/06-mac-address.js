@@ -12,8 +12,11 @@
  * For 00-1B-63-84-45-E6, the output should be true.
  *
  */
-function isMAC48Address(/* n */) {
-  throw new Error('Not implemented');
+function isMAC48Address(str) {
+  const regexp = /^\p{Hex_Digit}\p{Hex_Digit}-\p{Hex_Digit}\p{Hex_Digit}-\p{Hex_Digit}\p{Hex_Digit}-\p{Hex_Digit}\p{Hex_Digit}-\p{Hex_Digit}\p{Hex_Digit}-\p{Hex_Digit}\p{Hex_Digit}$/iu;
+  const matches = str.match(regexp) || [];
+  if (str === matches[0]) return true;
+  return false;
 }
 
 module.exports = isMAC48Address;
