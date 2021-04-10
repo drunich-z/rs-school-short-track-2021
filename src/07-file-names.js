@@ -11,10 +11,27 @@
  * @example
  * For input ["file", "file", "image", "file(1)", "file"],
  * the output should be ["file", "file(1)", "image", "file(1)(1)", "file(2)"]
- *
  */
-function renameFiles(/* names */) {
-  throw new Error('Not implemented');
+
+function renameFiles(names) {
+  const result = [];
+  const uniqNames = new Map();
+  let count = 0;
+  let current;
+  for (let i = 0; i < names.length; i++) {
+    current = names[i];
+    count = uniqNames.get(current);
+    if (count !== undefined) {
+      count++;
+      current += `(${count})`;
+      uniqNames.set(current, 0);
+    } else {
+      count = 0;
+    }
+    result[i] = current;
+    uniqNames.set(names[i], count);
+  }
+  return result;
 }
 
 module.exports = renameFiles;
