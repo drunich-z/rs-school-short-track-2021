@@ -20,8 +20,21 @@
  * }
  *
  */
-function getDNSStats(/* domains */) {
-  throw new Error('Not implemented');
+function getDNSStats(domains) {
+  const domainsList = new Map();
+  let oneDomain;
+  let element;
+  for (let i = 0; i < domains.length; i++) {
+    //  по списку
+    oneDomain = domains[i].split('.');
+    element = '';
+    for (let j = oneDomain.length - 1; j >= 0; j--) {
+      //  по элементу списка
+      element = `${element}.${oneDomain[j]}`; // из-за eslint так пришлось написать
+      domainsList.set(element, (domainsList.get(element) || 0) + 1); // В мап уникальные
+    }
+  }
+  return Object.fromEntries(domainsList.entries());
 }
 
 module.exports = getDNSStats;
